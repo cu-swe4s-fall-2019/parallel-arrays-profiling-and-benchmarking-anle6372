@@ -2,13 +2,20 @@
 
 Parameters
 ----------
+boxplot:
+L : a list sub-lists containing only integers and
+    floats that will be the data to be visualized
+histogram:
+L : a list containing only integers and
+    floats that will be the data to be visualized
+combo:
 L : a list containing only integers and
     floats that will be the data to be visualized
 out_file_name : the name of the output data visualization figure
 
 Returns
 -------
-boxplot : Creates a boxplot with the data in list L
+boxplot : Creates a boxplot with the data contained in the sub-lists in list L
 histogram : Creates a histogram with the data in list L
 combo: Creates a both a boxplot and histogram with the data in list L
 """
@@ -31,11 +38,15 @@ def boxplot(L, out_file_name):
         raise TypeError('Input must be list')
     s = 0
     for l in L:
-        if not isinstance(l, int) and not isinstance(l, float):
-            raise ValueError('Invalid type in list.')
+        if not isinstance(l, list):
+            raise ValueError('Invalid type in major list.')
+        for d in l:
+            if not isinstance(d, int) and not isinstance(d, float):
+                raise ValueError('Invalid type in minor list.')
     if os.path.exists(out_file_name) is True:
         print('This file name already exists')
         return
+
 
     out_file = out_file_name
     plt.title('Insert Plot Title', fontsize=20)

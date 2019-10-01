@@ -157,6 +157,27 @@ class TestInvalidListInput(unittest.TestCase):
             ['A', 'B', 'C'], self.test_file_name))
 
 
+# Testing nested list input
+class TestValidListInput(unittest.TestCase):
+
+    def setUp(self):
+        self.test_file_name = 'setup_test_file.txt'
+        f = open(self.test_file_name, 'w')
+        f.close()
+
+    def tearDown(self):
+        os.remove(self.test_file_name)
+
+    def test_boxplot_empty_3x_nested_array(self):
+        self.assertRaises(ValueError, lambda: data_viz.boxplot(
+            [[[]]], self.test_file_name))
+
+    def test_boxplot_string_nest_array(self):
+        self.assertRaises(ValueError, lambda: data_viz.boxplot(
+            [['A'], ['B'], ['C']], self.test_file_name))
+
+
+
 # Testing no file creation
 class TestFileNonExistance(unittest.TestCase):
 
@@ -169,7 +190,7 @@ class TestFileNonExistance(unittest.TestCase):
 class TestFileExistance(unittest.TestCase):
     def setUp(self):
         data_viz.histogram([1], 'test_file_name1.png')
-        data_viz.boxplot([1], 'test_file_name2.png')
+        data_viz.boxplot([[1]], 'test_file_name2.png')
         data_viz.combo([1], 'test_file_name3.png')
 
     def test_file_exists(self):
