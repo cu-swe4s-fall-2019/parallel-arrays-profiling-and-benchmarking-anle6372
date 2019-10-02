@@ -36,7 +36,6 @@ def boxplot(L, out_file_name):
         return None
     if not isinstance(L, list):
         raise TypeError('Input must be list')
-    s = 0
     for l in L:
         if not isinstance(l, list):
             raise ValueError('Invalid type in major list.')
@@ -67,7 +66,6 @@ def histogram(L, out_file_name):
         return None
     if not isinstance(L, list):
         raise TypeError('Input must be list')
-    s = 0
     for l in L:
         if not isinstance(l, int) and not isinstance(l, float):
             raise ValueError('Invalid type in list.')
@@ -94,7 +92,6 @@ def combo(L, out_file_name):
         return None
     if not isinstance(L, list):
         raise TypeError('Input must be list')
-    s = 0
     for l in L:
         if not isinstance(l, int) and not isinstance(l, float):
             raise ValueError('Invalid type in list.')
