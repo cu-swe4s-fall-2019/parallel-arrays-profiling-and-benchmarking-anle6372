@@ -5,13 +5,19 @@ Parameters
 boxplot:
 L : a list sub-lists containing only integers and
     floats that will be the data to be visualized
+X : a list parallel to L containing the labels that correspond to the data in L
+    out_file_name : the name of the output data visualization figure
+title : A string that is the title for plot
+xaxis : A string that is the xaxis label
+yaxis : A string that is the yaxis label
+out_file_name : name of the output file
+
 histogram:
 L : a list containing only integers and
     floats that will be the data to be visualized
 combo:
 L : a list containing only integers and
     floats that will be the data to be visualized
-out_file_name : the name of the output data visualization figure
 
 Returns
 -------
@@ -27,7 +33,7 @@ matplotlib.use('Agg')
 
 
 # method for creating boxplots
-def boxplot(L, out_file_name):
+def boxplot(L, X, title, xaxis, yaxis, out_file_name):
 
     # ensures correct input type
     if L is None:
@@ -48,11 +54,12 @@ def boxplot(L, out_file_name):
 
 
     out_file = out_file_name
-    plt.title('Insert Plot Title', fontsize=20)
-    plt.xlabel('X')
-    plt.ylabel('Y')
-
+    plt.figure(figsize=(20, 5))
     plt.boxplot(L)
+    plt.xticks(list(range(1, (1+len(L)))), X, rotation='vertical', ha='center')
+    plt.title(title, fontsize=20)
+    plt.xlabel(xaxis)
+    plt.ylabel(yaxis)
     plt.savefig(out_file, bbox_inches='tight')
 
 
