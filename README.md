@@ -26,6 +26,7 @@ conda install matplotlib
         - Added input testing to ensure key and list elements are same type
         - Added linear search functionality
         - Enabled full type and gene expression plot capibilities
+        - Benchmarking using GNU time yielded 128.18 seconds and used 139768 kB
 
 Files:
 - https://github.com/swe4s/lectures/blob/master/data_integration/gtex/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_reads.acmg_59.gct.gz?raw=true

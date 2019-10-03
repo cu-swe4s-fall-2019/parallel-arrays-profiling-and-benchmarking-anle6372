@@ -122,9 +122,9 @@ def main():
                         type_counts[type_idx].append(int(A[member_idx]))
             break
 
-    data_viz.boxplot(group_counts, groups, 'Gene Expression of Tissue Group', 'Tissue Group = SMTS',
+    data_viz.boxplot(group_counts, groups, 'BRCA2 Expression of Tissue Group', 'Tissue Group = SMTS',
                      'Counts','tissue_group.png')
-    data_viz.boxplot(type_counts, types, 'Gene Expression of Tissue Type', 'Tissue Type = SMTSD',
+    data_viz.boxplot(type_counts, types, 'BRCA2 Gene Expression of Tissue Type', 'Tissue Type = SMTSD',
                      'Counts', 'tissue_type.png')
 
 if __name__ == '__main__':
