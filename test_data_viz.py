@@ -18,7 +18,9 @@ import os
 class TestNone(unittest.TestCase):
 
     def test_boxplot_none(self):
-        self.assertEqual(data_viz.boxplot(None, None), None)
+        self.assertEqual(data_viz.boxplot(None, [],
+                                          'title', 'xaxis',
+                                          'yaxis', None), None)
 
     def test_histogram_none(self):
         self.assertEqual(data_viz.histogram(None, None), None)
@@ -54,6 +56,8 @@ class TestIncorrectInput(unittest.TestCase):
     def test_boxplot_string(self):
         self.assertRaises(TypeError,
                           lambda: data_viz.boxplot(str('hi'),
+                                                   [], 'title', 'xaxis',
+                                                   'yaxis',
                                                    self.test_file_name))
 
     def test_histogram_string(self):
@@ -67,9 +71,8 @@ class TestIncorrectInput(unittest.TestCase):
                                                  self.test_file_name))
 
     def test_boxplot_int(self):
-        self.assertRaises(TypeError,
-                          lambda: data_viz.boxplot(4,
-                                                   self.test_file_name))
+        self.assertRaises(TypeError, lambda: data_viz.boxplot(
+            4, [], 'title', 'xaxis', 'yaxis', self.test_file_name))
 
     def test_histogram_int(self):
         self.assertRaises(TypeError,
@@ -77,12 +80,14 @@ class TestIncorrectInput(unittest.TestCase):
 
     def test_combo_int(self):
         self.assertRaises(TypeError,
-                          lambda: data_viz.combo(4, self.test_file_name))
+                          lambda: data_viz.combo(
+                              4, self.test_file_name))
 
     def test_boxplot_float(self):
         self.assertRaises(TypeError,
-                          lambda: data_viz.boxplot(420.69,
-                                                   self.test_file_name))
+                          lambda: data_viz.boxplot(
+                              420.69, [], 'title',
+                              'xaxis', 'yaxis', self.test_file_name))
 
     def test_histogram_float(self):
         self.assertRaises(TypeError,
@@ -96,8 +101,9 @@ class TestIncorrectInput(unittest.TestCase):
 
     def test_boxplot_Boolean(self):
         self.assertRaises(TypeError,
-                          lambda: data_viz.boxplot(True,
-                                                   self.test_file_name))
+                          lambda: data_viz.boxplot(
+                              True, [], 'title',
+                              'xaxis', 'yaxis', self.test_file_name))
 
     def test_histogram_Boolean(self):
         self.assertRaises(TypeError,
@@ -122,7 +128,8 @@ class TestEmptyListInput(unittest.TestCase):
         os.remove(self.test_file_name)
 
     def test_boxplot_empty_array(self):
-        self.assertEqual(data_viz.boxplot([], self.test_file_name), None)
+        self.assertEqual(data_viz.boxplot(
+            [], [], 'title', 'xaxis', 'yaxis', self.test_file_name), None)
 
     def test_histogram_empty_array(self):
         self.assertEqual(data_viz.histogram([], self.test_file_name), None)
@@ -144,7 +151,8 @@ class TestInvalidListInput(unittest.TestCase):
 
     def test_boxplot_letter_array(self):
         self.assertRaises(ValueError, lambda: data_viz.boxplot(
-            ['A', 'B', 'C'], self.test_file_name))
+            ['A', 'B', 'C'], [], 'title', 'xaxis',
+            'yaxis', self.test_file_name))
 
     def test_histogram_letter_array(self):
 
@@ -170,11 +178,13 @@ class TestValidListInput(unittest.TestCase):
 
     def test_boxplot_empty_3x_nested_array(self):
         self.assertRaises(ValueError, lambda: data_viz.boxplot(
-            [[[]]], self.test_file_name))
+            [[[]]], [], 'title',
+            'xaxis', 'yaxis', self.test_file_name))
 
     def test_boxplot_string_nest_array(self):
         self.assertRaises(ValueError, lambda: data_viz.boxplot(
-            [['A'], ['B'], ['C']], self.test_file_name))
+            [['A'], ['B'], ['C']], [], 'title',
+            'xaxis', 'yaxis', self.test_file_name))
 
 
 # Testing no file creation
@@ -188,17 +198,15 @@ class TestFileNonExistance(unittest.TestCase):
 # Testing file creation
 class TestFileExistance(unittest.TestCase):
     def setUp(self):
-        data_viz.histogram([1], 'test_file_name1.png')
-        data_viz.boxplot([[1]], 'test_file_name2.png')
-        data_viz.combo([1], 'test_file_name3.png')
+        data_viz.boxplot([[1]], [],
+                         'title', 'xaxis', 'yaxis', 'test_file_name.png')
+
+    def tearDown(self):
+        os.remove('test_file_name.png')
 
     def test_file_exists(self):
 
-        self.assertTrue(os.path.exists('test_file_name1.png'))
-
-        self.assertTrue(os.path.exists('test_file_name2.png'))
-
-        self.assertTrue(os.path.exists('test_file_name3.png'))
+        self.assertTrue(os.path.exists('test_file_name.png'))
 
 
 if __name__ == '__main__':
