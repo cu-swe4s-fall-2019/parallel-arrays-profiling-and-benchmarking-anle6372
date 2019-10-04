@@ -9,6 +9,14 @@ before_install:
     - conda create --yes -n test
     - conda activate test
     - conda install -y pycodestyle
+    - conda install -y matplotlib
     - conda install --yes python=3.6
       
 script:
+    - python test_data_viz.py
+    - python test_plot_gtex.py
+    - pycodestyle test_data_viz.py
+    - pycodestyle test_plot_gtex.py
+    - pycodestyle plot_gtex.py
+    - pycodestyle data_viz.py
+    - bash plot_gtex_test.sh

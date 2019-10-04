@@ -11,7 +11,7 @@ None
 
 import unittest
 import plot_gtex
-import random
+import os
 
 
 # Testing none input
@@ -25,7 +25,8 @@ class TestNone(unittest.TestCase):
 class TestIncorrect(unittest.TestCase):
     def test_plot_gtex_string(self):
         self.assertRaises(TypeError,
-                          lambda: plot_gtex.linear_search(str('key'), str('hi')))
+                          lambda: plot_gtex.linear_search(
+                              str('key'), str('hi')))
 
     def test_plot_gtex_int(self):
         self.assertRaises(TypeError,
@@ -37,22 +38,49 @@ class TestIncorrect(unittest.TestCase):
 
     def test_plot_gtex_float(self):
         self.assertRaises(TypeError,
-                          lambda: plot_gtex.linear_search(str('key'), float(4)))
+                          lambda: plot_gtex.linear_search(
+                              str('key'), float(4)))
+
 
 # Testing mixed types
 class TestMixedTypes(unittest.TestCase):
     def test_plot_gtex_string_int(self):
         self.assertRaises(TypeError,
-                          lambda: plot_gtex.linear_search(str('key'), [1, 2, 3, 4, 5, 6, 7, 8]))
+                          lambda: plot_gtex.linear_search(
+                              str('key'), [1, 2, 3, 4, 5, 6, 7, 8]))
+
 
 # Testing correct input
 class TestCorrectConstant(unittest.TestCase):
 
     def test_plot_gtex_const_int(self):
-        self.assertEqual(plot_gtex.linear_search(4, [1, 2, 3, 4, 5, 6, 7, 8]), 3)
+        self.assertEqual(plot_gtex.linear_search(
+            4, [1, 2, 3, 4, 5, 6, 7, 8]), 3)
 
     def test_plot_gtex_const_str(self):
-        self.assertEqual(plot_gtex.linear_search(str('cat'), [str('dog'), str('cat'), str('walrus')]), 1)
+        self.assertEqual(plot_gtex.linear_search(
+            str('cat'), [str('dog'), str('cat'), str('walrus')]), 1)
+
+
+# Testing no file creation
+class TestFileNonExistance(unittest.TestCase):
+
+    def test_file_does_not_exist(self):
+
+        self.assertFalse(os.path.exists('tissue_type.png'))
+
+
+# Testing file creation
+class TestFileExistance(unittest.TestCase):
+    def setUp(self):
+        plot_gtex.main()
+
+    def test_file_exists(self):
+
+        self.assertTrue(os.path.exists('tissue_type.png'))
+
+    def tearDown(self):
+        os.remove('tissue_type.png')
 
 
 if __name__ == '__main__':
