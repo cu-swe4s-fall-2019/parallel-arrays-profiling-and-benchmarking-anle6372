@@ -70,18 +70,5 @@ class TestFileNonExistance(unittest.TestCase):
         self.assertFalse(os.path.exists('tissue_type.png'))
 
 
-# Testing file creation
-class TestFileExistance(unittest.TestCase):
-    def setUp(self):
-        plot_gtex.main()
-
-    def test_file_exists(self):
-
-        self.assertTrue(os.path.exists('tissue_type.png'))
-
-    def tearDown(self):
-        os.remove('tissue_type.png')
-
-
 if __name__ == '__main__':
     unittest.main()

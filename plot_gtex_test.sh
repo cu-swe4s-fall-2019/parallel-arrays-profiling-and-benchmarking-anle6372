@@ -8,4 +8,3 @@ assert_no_stdout
 
 run pycodestyle plot_gtex.py
 assert_no_stdout
-assert_no_stderr
