@@ -52,7 +52,6 @@ def boxplot(L, X, title, xaxis, yaxis, out_file_name):
         print('This file name already exists')
         return
 
-
     out_file = out_file_name
     plt.figure(figsize=(20, 5))
     plt.boxplot(L)

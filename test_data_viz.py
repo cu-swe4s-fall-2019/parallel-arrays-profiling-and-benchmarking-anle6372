@@ -177,7 +177,6 @@ class TestValidListInput(unittest.TestCase):
             [['A'], ['B'], ['C']], self.test_file_name))
 
 
-
 # Testing no file creation
 class TestFileNonExistance(unittest.TestCase):
 
