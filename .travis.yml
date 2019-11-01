@@ -17,6 +17,5 @@ script:
     - python test_plot_gtex.py
     - pycodestyle test_data_viz.py
     - pycodestyle test_plot_gtex.py
-    - pycodestyle plot_gtex.py
     - pycodestyle data_viz.py
     - bash plot_gtex_test.sh
