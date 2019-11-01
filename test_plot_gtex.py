@@ -10,7 +10,7 @@ None
 """
 
 import unittest
-import plot_gtex
+# import plot_gtex
 import os
 
 #
